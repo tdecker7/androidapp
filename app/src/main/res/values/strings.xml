@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Brew Day</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Brew Day</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+    <string name="addRecipe">Add Recipe</string>
+    <string name="addRecipeName">Recipe Name</string>
+    <string name="addRecipeStyle">Style</string>
+    <string name="addRecipeMalt">Malt</string>
+    <string name="addRecipeHops">Hops</string>
+    <string name="addRecipeYeast">Yeast</string>
+    <string name="submitRecipeButton">Submit Recipe</string>
+</resources>
