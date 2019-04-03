@@ -59,7 +59,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         nav_view.setNavigationItemSelectedListener(this)
     }
 
-    fun addRecipe(view: View) {
+    fun addRecipe() {
         val intent = Intent(this, AddRecipe::class.java)
         startActivity(intent)
 
