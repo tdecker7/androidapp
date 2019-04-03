@@ -15,6 +15,7 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.brewday.DBOpenHelper
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 
@@ -30,7 +31,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         setSupportActionBar(toolbar)
 
         val recipe = Recipe("SMASH", "American Pale", "2-row", "Columbus", "Wyeast American")
-        recipesList = recipe.createRecipesList(recipe)
+        val dbHelper = DBOpenHelper(this, null)
+//        recipesList = recipe.createRecipesList(recipe)
+
+        recipesList = dbHelper.getAllRecipes()
 
         viewManager = LinearLayoutManager(this)
         recipesAdapter = RecipesAdapter(recipesList)

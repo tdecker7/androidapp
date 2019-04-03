@@ -2,8 +2,10 @@ package com.example.myapplication
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
+import com.example.brewday.DBOpenHelper
 
 class AddRecipe : AppCompatActivity() {
 
@@ -14,6 +16,7 @@ class AddRecipe : AppCompatActivity() {
         val submitRecipeButton = findViewById<Button>(R.id.submit_recipe_button)
 
         submitRecipeButton.setOnClickListener { view ->
+            val dbHandler = DBOpenHelper(this, null)
             val recipe = Recipe(
                 findViewById<EditText>(R.id.add_recipe_name).text.toString(),
                 findViewById<EditText>(R.id.add_recipe_style).text.toString(),
@@ -22,7 +25,9 @@ class AddRecipe : AppCompatActivity() {
                 findViewById<EditText>(R.id.add_recipe_yeast).text.toString()
             )
 
-            MainActivity().recipesList.add(recipe)
+            Log.d("DATABASEINFO", recipe.toString())
+
+            dbHandler.addRecipe(recipe)
         }
     }
 

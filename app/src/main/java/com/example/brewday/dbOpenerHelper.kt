@@ -5,28 +5,27 @@ import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import android.util.Log
 import com.example.myapplication.Recipe
 
-class DBOpenHelper(context: Context,
-                           factory: SQLiteDatabase.CursorFactory?) :
-    SQLiteOpenHelper(context, DATABASE_NAME,
-        factory, DATABASE_VERSION) {
+class DBOpenHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) : SQLiteOpenHelper(context, DATABASE_NAME, factory, DATABASE_VERSION) {
     override fun onCreate(db: SQLiteDatabase) {
-        val CREATE_PRODUCTS_TABLE = ("CREATE TABLE " +
+
+        val CREATE_RECIPES_TABLE = ("CREATE TABLE " +
                 TABLE_NAME + "("
                 + COLUMN_ID + " INTEGER PRIMARY KEY," +
                 recipe_name_column
-                + " TEXT" +
+                + " TEXT," +
                 recipe_style_column
-                + " TEXT" +
+                + " TEXT," +
                 recipe_malt_column
-                + " TEXT" +
+                + " TEXT," +
                 recipe_hops_column
-                + " TEXT" +
+                + " TEXT," +
                 recipe_yeast_column
                 + " TEXT"
                 + ")")
-        db.execSQL(CREATE_PRODUCTS_TABLE)
+        db.execSQL(CREATE_RECIPES_TABLE)
     }
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME)
@@ -35,13 +34,41 @@ class DBOpenHelper(context: Context,
     fun addRecipe(recipe: Recipe) {
         val values = ContentValues()
         values.put(recipe_name_column, recipe.name)
+        values.put(recipe_style_column, recipe.style)
+        values.put(recipe_malt_column, recipe.malt)
+        values.put(recipe_hops_column, recipe.hops)
+        values.put(recipe_yeast_column, recipe.yeast)
+
         val db = this.writableDatabase
         db.insert(TABLE_NAME, null, values)
         db.close()
     }
-    fun getAllRecipes(): Cursor? {
+    fun getAllRecipes(): ArrayList<Recipe> {
         val db = this.readableDatabase
-        return db.rawQuery("SELECT * FROM $TABLE_NAME", null)
+        val recipesList = ArrayList<Recipe>()
+        Log.d("RECIPESINFO", recipesList.toString())
+        var cursor =  db.rawQuery("SELECT * FROM $TABLE_NAME", null)
+
+        if (cursor.moveToFirst()) {
+            do {
+                val recipe_name = cursor.getString(cursor.getColumnIndex("recipe_name"))
+                val recipe_style = cursor.getString(cursor.getColumnIndex("recipe_style"))
+                Log.d("DATABASEINFO", "$recipe_name, $recipe_style")
+                val retrievedRecipe = Recipe(
+                    cursor.getString(cursor.getColumnIndex("recipe_name")),
+                    cursor.getString(cursor.getColumnIndex("recipe_style")),
+                    cursor.getString(cursor.getColumnIndex("recipe_malt")),
+                    cursor.getString(cursor.getColumnIndex("recipe_hops")),
+                    cursor.getString(cursor.getColumnIndex("recipe_yeast"))
+                )
+
+                Log.d("RECIPESINFO", retrievedRecipe.toString())
+//
+//                retrievedRecipe.addRecipeToList(recipesList, retrievedRecipe)
+
+            } while (cursor.moveToNext())
+        }
+        return recipesList
     }
     companion object {
         private val DATABASE_VERSION = 1
