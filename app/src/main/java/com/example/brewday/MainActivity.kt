@@ -31,12 +31,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
-        val recipe = Recipe("SMASH", "American Pale", "2-row", "Columbus", "Wyeast American")
         val dbHelper = DBOpenHelper(this, null)
-//        recipesList = recipe.createRecipesList(recipe)
 
         recipesList = dbHelper.getAllRecipes()
-        Log.d("onstartinfo", recipesList.toString())
 
         viewManager = LinearLayoutManager(this)
         recipesAdapter = RecipesAdapter(recipesList)
@@ -60,22 +57,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         toggle.syncState()
 
         nav_view.setNavigationItemSelectedListener(this)
-    }
-
-    override fun onStart() {
-        super.onStart()
-
-        val dbHelper = DBOpenHelper(this, null)
-
-        recipesList = dbHelper.getAllRecipes()
-        Log.d("onstartinfo:", recipesList.toString())
-        viewManager = LinearLayoutManager(this)
-        recipesAdapter = RecipesAdapter(recipesList)
-        recyclerView = findViewById<RecyclerView>(R.id.rvRecipes).apply {
-            setHasFixedSize(true)
-            layoutManager = viewManager
-            adapter = recipesAdapter
-        }
     }
 
     fun addRecipe(view: View) {
