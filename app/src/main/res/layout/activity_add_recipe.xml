@@ -10,31 +10,31 @@
                                                            android:layout_height="wrap_content">
 
             <TextView
-                    android:text="@string/addRecipe"
+                    android:hint="@string/addRecipe"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="30sp"
                     android:textStyle="bold"
                     android:textColor="@color/black"
-                    android:id="@+id/addRecipe" app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
+                    android:id="@+id/addRecipeTitle" app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
                     app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp" android:layout_marginTop="8dp"
                     app:layout_constraintTop_toTopOf="parent"/>
             <EditText
                     android:layout_width="314dp"
                     android:layout_height="51dp"
-                    android:inputType="textPersonName"
-                    android:text="@string/addRecipeName"
+                    android:inputType="text"
+                    android:hint="@string/addRecipeName"
                     android:ems="10"
                     android:id="@+id/add_recipe_name"
                     android:layout_marginTop="8dp"
-                    app:layout_constraintTop_toBottomOf="@+id/addRecipe" android:layout_marginEnd="8dp"
+                    app:layout_constraintTop_toBottomOf="@+id/addRecipeTitle" android:layout_marginEnd="8dp"
                     app:layout_constraintEnd_toEndOf="parent" android:layout_marginStart="8dp"
                     app:layout_constraintStart_toStartOf="parent"/>
             <EditText
                     android:layout_width="314dp"
                     android:layout_height="51dp"
-                    android:inputType="textPersonName"
-                    android:text="@string/addRecipeStyle"
+                    android:inputType="text"
+                    android:hint="@string/addRecipeStyle"
                     android:ems="10"
                     android:id="@+id/add_recipe_style"
                     android:layout_marginTop="8dp"
@@ -44,8 +44,8 @@
             <EditText
                     android:layout_width="314dp"
                     android:layout_height="51dp"
-                    android:inputType="textPersonName"
-                    android:text="@string/addRecipeMalt"
+                    android:inputType="text"
+                    android:hint="@string/addRecipeMalt"
                     android:ems="10"
                     android:id="@+id/add_recipe_malt"
                     android:layout_marginTop="8dp"
@@ -55,8 +55,8 @@
             <EditText
                     android:layout_width="314dp"
                     android:layout_height="51dp"
-                    android:inputType="textPersonName"
-                    android:text="@string/addRecipeHops"
+                    android:inputType="text"
+                    android:hint="@string/addRecipeHops"
                     android:ems="10"
                     android:id="@+id/add_recipe_hops"
                     android:layout_marginTop="8dp"
@@ -66,8 +66,8 @@
             <EditText
                     android:layout_width="314dp"
                     android:layout_height="51dp"
-                    android:inputType="textPersonName"
-                    android:text="@string/addRecipeYeast"
+                    android:inputType="text"
+                    android:hint="@string/addRecipeYeast"
                     android:ems="10"
                     android:id="@+id/add_recipe_yeast"
                     android:layout_marginTop="8dp"
