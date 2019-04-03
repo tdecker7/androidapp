@@ -2,6 +2,7 @@ package com.example.myapplication
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.navigation.NavigationView
 import androidx.core.view.GravityCompat
@@ -35,6 +36,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 //        recipesList = recipe.createRecipesList(recipe)
 
         recipesList = dbHelper.getAllRecipes()
+        Log.d("onstartinfo", recipesList.toString())
 
         viewManager = LinearLayoutManager(this)
         recipesAdapter = RecipesAdapter(recipesList)
@@ -58,6 +60,22 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         toggle.syncState()
 
         nav_view.setNavigationItemSelectedListener(this)
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+        val dbHelper = DBOpenHelper(this, null)
+
+        recipesList = dbHelper.getAllRecipes()
+        Log.d("onstartinfo:", recipesList.toString())
+        viewManager = LinearLayoutManager(this)
+        recipesAdapter = RecipesAdapter(recipesList)
+        recyclerView = findViewById<RecyclerView>(R.id.rvRecipes).apply {
+            setHasFixedSize(true)
+            layoutManager = viewManager
+            adapter = recipesAdapter
+        }
     }
 
     fun addRecipe(view: View) {

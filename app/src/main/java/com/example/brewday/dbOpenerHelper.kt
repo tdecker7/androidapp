@@ -64,7 +64,7 @@ class DBOpenHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) : S
 
                 Log.d("RECIPESINFO", retrievedRecipe.toString())
 //
-//                retrievedRecipe.addRecipeToList(recipesList, retrievedRecipe)
+                retrievedRecipe.addRecipeToList(recipesList, retrievedRecipe)
 
             } while (cursor.moveToNext())
         }

@@ -17,7 +17,6 @@ class RecipesAdapter(private val recipesList: ArrayList<Recipe>) :
     override fun getItemCount() = recipesList.size
 
     override fun onBindViewHolder(holder: RecipesViewHolder, position: Int) {
-        val position = 0
         var recipeNameView = holder.textView.findViewById<TextView>(R.id.recipe_name)
         var recipeStyle = holder.textView.findViewById<TextView>(R.id.recipe_style)
         var recipeButton = holder.textView.findViewById<Button>(R.id.view_recipe_button)
@@ -25,7 +24,7 @@ class RecipesAdapter(private val recipesList: ArrayList<Recipe>) :
         recipeButton.text = "View Recipe"
         recipeNameView.text = recipesList[position].name
         recipeStyle.text = recipesList[position].style
-        recipeImage.setImageResource(recipesList[position].image)
+//        recipeImage.setImageResource(recipesList[position].image)
 //        holder.textView.text = recipesList[position].name
     }
 
