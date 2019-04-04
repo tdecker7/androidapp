@@ -2,8 +2,6 @@ package com.example.myapplication
 
 import android.content.Context
 import android.content.Intent
-import com.example.myapplication.R
-import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
