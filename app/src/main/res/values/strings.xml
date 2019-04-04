@@ -18,4 +18,5 @@
     <string name="viewRecipeHops">Hops</string>
     <string name="viewRecipeYeast">Yeast</string>
     <string name="updateRecipeButton">Update Recipe</string>
+    <string name="deleteRecipeButton">Delete Recipe</string>
 </resources>

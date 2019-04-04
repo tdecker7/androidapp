@@ -37,7 +37,7 @@
     </LinearLayout>
 
     <ImageView
-            android:id="@+id/recipe_image"
+            android:id="@+id/e"
             android:layout_width="88dp"
             android:layout_height="75dp"
     />

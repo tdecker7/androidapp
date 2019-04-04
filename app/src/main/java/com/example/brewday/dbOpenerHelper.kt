@@ -47,6 +47,26 @@ class DBOpenHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) : S
         db.close()
     }
 
+    fun getRecipeById(id: String) : Recipe? {
+        val db = this.readableDatabase
+
+        var cursor = db.rawQuery("SELECT * FROM $TABLE_NAME WHERE _id = '$id'", null)
+
+        Log.d("DATABASEINFO", "SELECT * from $TABLE_NAME where _id = '$id'")
+        if(cursor.count > 0) {
+
+            return Recipe(
+                cursor.getString(cursor.getColumnIndex("COLUMN_ID")),
+                cursor.getString(cursor.getColumnIndex("recipe_name")),
+                cursor.getString(cursor.getColumnIndex("recipe_style")),
+                cursor.getString(cursor.getColumnIndex("recipe_malt")),
+                cursor.getString(cursor.getColumnIndex("recipe_hops")),
+                cursor.getString(cursor.getColumnIndex("recipe_yeast"))
+            )
+        }
+        return null
+    }
+
     fun getAllRecipes(): ArrayList<Recipe> {
         val db = this.readableDatabase
         val recipesList = ArrayList<Recipe>()
@@ -59,6 +79,7 @@ class DBOpenHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) : S
                 val recipe_style = cursor.getString(cursor.getColumnIndex("recipe_style"))
                 Log.d("DATABASEINFO", "$recipe_name, $recipe_style")
                 val retrievedRecipe = Recipe(
+                    cursor.getString(cursor.getColumnIndex("COLUMN_ID")),
                     cursor.getString(cursor.getColumnIndex("recipe_name")),
                     cursor.getString(cursor.getColumnIndex("recipe_style")),
                     cursor.getString(cursor.getColumnIndex("recipe_malt")),
@@ -75,10 +96,10 @@ class DBOpenHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) : S
         return recipesList
     }
 
-    fun deleteRecipe(id: Int) {
+    fun deleteRecipe(id: String) {
         val db = this.readableDatabase
 
-        db.rawQuery("DELETE FROM $TABLE_NAME where id = $id", null)
+        db.rawQuery("DELETE FROM $TABLE_NAME where id = '$id'", null)
     }
 
     fun updateRecipe(recipe: Recipe) {

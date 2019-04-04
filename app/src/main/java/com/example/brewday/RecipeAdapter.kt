@@ -23,16 +23,15 @@ class RecipesAdapter(private val recipesList: ArrayList<Recipe>) :
         recipeNameView.text = recipesList[position].name
         recipeStyle.text = recipesList[position].style
 
+        recipeButton.setOnClickListener {
+            holder.viewRecipe(holder.textView.context, recipesList[position].id)
+        }
     }
 
     class RecipesViewHolder(val textView: LinearLayout) : RecyclerView.ViewHolder(textView) {
-        val viewButton = textView.findViewById<Button>(R.id.view_recipe_button).setOnClickListener {
-            val context = textView.context
-            viewRecipe(context)
-        }
-
-        private fun viewRecipe(context: Context) {
+        fun viewRecipe(context: Context, id: String)  {
             val intent = Intent(context, ViewRecipe::class.java)
+            intent.putExtra("ID", id)
             startActivity(context, intent, null)
         }
     }

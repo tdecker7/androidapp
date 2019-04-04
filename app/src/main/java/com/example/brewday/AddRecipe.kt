@@ -19,11 +19,11 @@ class AddRecipe : AppCompatActivity() {
         submitRecipeButton.setOnClickListener { view ->
             val dbHandler = DBOpenHelper(this, null)
             val recipe = Recipe(
-                findViewById<EditText>(R.id.add_recipe_name).text.toString(),
-                findViewById<EditText>(R.id.add_recipe_style).text.toString(),
-                findViewById<EditText>(R.id.add_recipe_malt).text.toString(),
-                findViewById<EditText>(R.id.add_recipe_hops).text.toString(),
-                findViewById<EditText>(R.id.add_recipe_yeast).text.toString()
+                name=findViewById<EditText>(R.id.add_recipe_name).text.toString(),
+                style=findViewById<EditText>(R.id.add_recipe_style).text.toString(),
+                malt=findViewById<EditText>(R.id.add_recipe_malt).text.toString(),
+                hops=findViewById<EditText>(R.id.add_recipe_hops).text.toString(),
+                yeast=findViewById<EditText>(R.id.add_recipe_yeast).text.toString()
             )
 
             dbHandler.addRecipe(recipe)
