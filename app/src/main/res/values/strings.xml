@@ -13,4 +13,9 @@
     <string name="addRecipeHops">Hops</string>
     <string name="addRecipeYeast">Yeast</string>
     <string name="submitRecipeButton">Submit Recipe</string>
+    <string name="viewRecipeStyle">Style</string>
+    <string name="viewRecipeMalt">Malt</string>
+    <string name="viewRecipeHops">Hops</string>
+    <string name="viewRecipeYeast">Yeast</string>
+    <string name="updateRecipeButton">Update Recipe</string>
 </resources>

@@ -13,7 +13,7 @@ class DBOpenHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) : S
 
         val CREATE_RECIPES_TABLE = ("CREATE TABLE " +
                 TABLE_NAME + "("
-                + COLUMN_ID + " INTEGER PRIMARY KEY," +
+                + COLUMN_ID + " UUID PRIMARY KEY," +
                 recipe_name_column
                 + " TEXT," +
                 recipe_style_column
@@ -27,12 +27,15 @@ class DBOpenHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) : S
                 + ")")
         db.execSQL(CREATE_RECIPES_TABLE)
     }
+
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME)
         onCreate(db)
     }
+
     fun addRecipe(recipe: Recipe) {
         val values = ContentValues()
+        values.put(COLUMN_ID, recipe.id)
         values.put(recipe_name_column, recipe.name)
         values.put(recipe_style_column, recipe.style)
         values.put(recipe_malt_column, recipe.malt)
@@ -43,6 +46,7 @@ class DBOpenHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) : S
         db.insert(TABLE_NAME, null, values)
         db.close()
     }
+
     fun getAllRecipes(): ArrayList<Recipe> {
         val db = this.readableDatabase
         val recipesList = ArrayList<Recipe>()
@@ -70,6 +74,27 @@ class DBOpenHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) : S
         }
         return recipesList
     }
+
+    fun deleteRecipe(id: Int) {
+        val db = this.readableDatabase
+
+        db.rawQuery("DELETE FROM $TABLE_NAME where id = $id", null)
+    }
+
+    fun updateRecipe(recipe: Recipe) {
+        val db = this.readableDatabase
+
+        db.rawQuery(
+            "UPDATE $TABLE_NAME " +
+                    "SET $recipe_name_column = ${recipe.name} " +
+                    "$recipe_style_column = ${recipe.style} " +
+                    "$recipe_malt_column = ${recipe.malt} " +
+                    "$recipe_hops_column = ${recipe.hops} " +
+                    "$recipe_yeast_column = ${recipe.yeast} " +
+                    "where id = ${recipe.id};",
+        null)
+    }
+
     companion object {
         private val DATABASE_VERSION = 1
         private val DATABASE_NAME = "brewday.db"

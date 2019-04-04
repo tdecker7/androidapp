@@ -26,8 +26,6 @@ class AddRecipe : AppCompatActivity() {
                 findViewById<EditText>(R.id.add_recipe_yeast).text.toString()
             )
 
-            Log.d("DATABASEINFO", recipe.toString())
-
             dbHandler.addRecipe(recipe)
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)

@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.brewday.DBOpenHelper
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
+import kotlinx.android.synthetic.main.recipe_item.*
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     private lateinit var recyclerView: RecyclerView
@@ -45,10 +46,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
 
 
-        fab.setOnClickListener { view ->
-
-            addRecipe(view)
+        fab.setOnClickListener {
+            addRecipe()
         }
+
 
         val toggle = ActionBarDrawerToggle(
             this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close
@@ -62,8 +63,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     fun addRecipe() {
         val intent = Intent(this, AddRecipe::class.java)
         startActivity(intent)
-
     }
+
 
     override fun onBackPressed() {
         if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
