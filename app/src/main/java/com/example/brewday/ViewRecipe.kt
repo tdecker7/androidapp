@@ -21,11 +21,11 @@ val updateRecipeButton = findViewById<Button>(R.id.update_recipe_button)
         updateRecipeButton.setOnClickListener {
             val dbHandler = DBOpenHelper(this, null)
             val recipe = Recipe(
-                findViewById<EditText>(R.id.view_recipe_name).text.toString(),
-                findViewById<EditText>(R.id.view_recipe_style).text.toString(),
-                findViewById<EditText>(R.id.view_recipe_malt).text.toString(),
-                findViewById<EditText>(R.id.view_recipe_hops).text.toString(),
-                findViewById<EditText>(R.id.view_recipe_yeast).text.toString()
+                name=findViewById<EditText>(R.id.view_recipe_name).text.toString(),
+                style=findViewById<EditText>(R.id.view_recipe_style).text.toString(),
+                malt=findViewById<EditText>(R.id.view_recipe_malt).text.toString(),
+                hops=findViewById<EditText>(R.id.view_recipe_hops).text.toString(),
+                yeast=findViewById<EditText>(R.id.view_recipe_yeast).text.toString()
             )
 
             dbHandler.updateRecipe(recipe)

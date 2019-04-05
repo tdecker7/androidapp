@@ -3,6 +3,7 @@ package com.example.brewday
 import android.content.ContentValues
 import android.content.Context
 import android.database.Cursor
+import android.database.DatabaseUtils
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.util.Log
@@ -53,10 +54,11 @@ class DBOpenHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) : S
         var cursor = db.rawQuery("SELECT * FROM $TABLE_NAME WHERE _id = '$id'", null)
 
         Log.d("DATABASEINFO", "SELECT * from $TABLE_NAME where _id = '$id'")
-        if(cursor.count > 0) {
+        if(cursor.moveToFirst()) {
 
+            Log.d("CURSORINFO", DatabaseUtils.dumpCursorToString(cursor))
             return Recipe(
-                cursor.getString(cursor.getColumnIndex("COLUMN_ID")),
+                cursor.getString(cursor.getColumnIndex("$COLUMN_ID")),
                 cursor.getString(cursor.getColumnIndex("recipe_name")),
                 cursor.getString(cursor.getColumnIndex("recipe_style")),
                 cursor.getString(cursor.getColumnIndex("recipe_malt")),
@@ -73,13 +75,11 @@ class DBOpenHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) : S
         Log.d("RECIPESINFO", recipesList.toString())
         var cursor =  db.rawQuery("SELECT * FROM $TABLE_NAME", null)
 
+        Log.d("CURSOR", cursor.count.toString())
         if (cursor.moveToFirst()) {
             do {
-                val recipe_name = cursor.getString(cursor.getColumnIndex("recipe_name"))
-                val recipe_style = cursor.getString(cursor.getColumnIndex("recipe_style"))
-                Log.d("DATABASEINFO", "$recipe_name, $recipe_style")
                 val retrievedRecipe = Recipe(
-                    cursor.getString(cursor.getColumnIndex("COLUMN_ID")),
+                    cursor.getString(cursor.getColumnIndex("$COLUMN_ID")),
                     cursor.getString(cursor.getColumnIndex("recipe_name")),
                     cursor.getString(cursor.getColumnIndex("recipe_style")),
                     cursor.getString(cursor.getColumnIndex("recipe_malt")),
