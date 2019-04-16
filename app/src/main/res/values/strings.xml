@@ -26,4 +26,5 @@
     <string name="view_recipes_main_button">Brew Recipes</string>
     <string name="view_processes_main_button">Brew Processes</string>
     <string name="viewProcessesTitle">Brew Processes</string>
+    <string name="view_process">View Process</string>
 </resources>
