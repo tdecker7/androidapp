@@ -32,30 +32,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
-        view_recipes_main.setOnClickListener {
-            viewRecipes()
-        }
-
-
-//        val dbHelper = DBOpenHelper(this, null)
-//
-//        recipesList = dbHelper.getAllRecipes()
-//
-//        viewManager = LinearLayoutManager(this)
-//        recipesAdapter = RecipesAdapter(recipesList)
-//
-//        recyclerView = findViewById<RecyclerView>(R.id.rvRecipes).apply {
-//            setHasFixedSize(true)
-//            layoutManager = viewManager
-//            adapter = recipesAdapter
-//        }
-
-
-//        fab.setOnClickListener {
-//            addRecipe()
-//        }
-
-
         val toggle = ActionBarDrawerToggle(
             this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close
         )
@@ -65,16 +41,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         nav_view.setNavigationItemSelectedListener(this)
     }
 
-    fun viewRecipes() {
+    fun viewRecipes(view: View) {
         val intent = Intent(this, ViewRecipes::class.java)
         startActivity(intent)
     }
-
-//    fun addRecipe() {
-//        val intent = Intent(this, AddRecipe::class.java)
-//        startActivity(intent)
-//    }
-
 
     override fun onBackPressed() {
         if (drawer_layout.isDrawerOpen(GravityCompat.START)) {

@@ -42,6 +42,7 @@
                 android:gravity="center"
                 android:textColor="@color/black"
                 android:background="@color/colorPrimaryDark"
+                android:onClick="viewRecipes"
         />
         <TextView
                 android:text="@string/view_processes_main_button"
