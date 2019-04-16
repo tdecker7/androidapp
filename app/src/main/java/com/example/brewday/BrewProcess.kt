@@ -9,6 +9,4 @@ class BrewProcess(var id: String = UUID.randomUUID().toString(),
     fun addProcessToList(processesList: ArrayList<BrewProcess>, process: BrewProcess) {
         processesList.add(process)
     }
-
-    fun type() = this.type
 }
