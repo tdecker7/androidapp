@@ -34,7 +34,6 @@ class ViewProcesses : AppCompatActivity() {
         val dbHelper = ProcessesDBOpenerHelper(this, null)
 
         processesList = dbHelper.getAllProcesses()
-        Log.d("processes", processesList.toString())
         viewManager = LinearLayoutManager(this)
         processesAdapter = ProcessesAdapter(processesList)
         recyclerView = findViewById<RecyclerView>(R.id.rvProcesses).apply {
