@@ -38,10 +38,8 @@ class RecipesAdapter(private val recipesList: ArrayList<Recipe>) :
 
     override fun onCreateViewHolder(parent: ViewGroup,
                                     viewType: Int): RecipesAdapter.RecipesViewHolder {
-        // create a new view
         val textView = LayoutInflater.from(parent.context)
             .inflate(R.layout.recipe_item, parent, false) as LinearLayout
-        // set the view's size, margins, paddings and layout parameters
         return RecipesViewHolder(textView)
     }
 
