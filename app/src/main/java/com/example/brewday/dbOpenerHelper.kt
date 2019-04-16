@@ -97,7 +97,6 @@ class DBOpenHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) : S
                 )
 
                 Log.d("RECIPESINFO", retrievedRecipe.toString())
-//
                 retrievedRecipe.addRecipeToList(recipesList, retrievedRecipe)
 
             } while (cursor.moveToNext())
@@ -127,6 +126,27 @@ class DBOpenHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) : S
 
         db.update(TABLE_NAME, values, "$COLUMN_ID = ?", arrayOf(contextId))
         db.close()
+    }
+
+    fun getAllProcesses(): ArrayList<BrewProcess> {
+        val db = this.readableDatabase
+
+        val processesList = ArrayList<BrewProcess>()
+
+        val cursor = db.rawQuery("select * from $processes_table_name", null)
+
+        if (cursor.moveToFirst()) {
+            do {
+                val retrievedProcess = BrewProcess(
+                    cursor.getString(cursor.getColumnIndex(processes_id)),
+                    cursor.getString(cursor.getColumnIndex(processes_name_column)),
+                    cursor.getString(cursor.getColumnIndex(processes_type_column))
+                )
+
+                retrievedProcess.addProcessToList(processesList, retrievedProcess)
+            } while (cursor.moveToNext())
+        }
+        return processesList
     }
 
     companion object {
