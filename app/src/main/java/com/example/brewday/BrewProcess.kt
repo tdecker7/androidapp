@@ -1,5 +1,12 @@
 package com.example.brewday
 
-class BrewProcess {
+import java.util.*
 
+class BrewProcess(var id: String = UUID.randomUUID().toString(),
+                  val name: String,
+                  val type: String) {
+
+    fun addProcessToList(processesList: ArrayList<BrewProcess>, process: BrewProcess) {
+        processesList.add(process)
+    }
 }
