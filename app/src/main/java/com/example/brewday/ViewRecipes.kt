@@ -2,13 +2,11 @@ package com.example.myapplication
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.brewday.DBOpenHelper
-import kotlinx.android.synthetic.main.activity_view_recipes.*
 
 class ViewRecipes : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
@@ -32,7 +30,6 @@ class ViewRecipes : AppCompatActivity() {
         val dbHelper = DBOpenHelper(this, null)
 
         recipesList = dbHelper.getAllRecipes()
-        Log.d("Allrecips", recipesList.toString())
         viewManager = LinearLayoutManager(this)
         recipesAdapter = RecipesAdapter(recipesList)
         recyclerView = findViewById<RecyclerView>(R.id.rvRecipes).apply {
@@ -44,7 +41,6 @@ class ViewRecipes : AppCompatActivity() {
     }
     fun addRecipe(view: View) {
         val addRecipeIntent = Intent(this, AddRecipe::class.java)
-        Log.d("TEST", addRecipeIntent.toString())
         startActivity(addRecipeIntent)
     }
 }
