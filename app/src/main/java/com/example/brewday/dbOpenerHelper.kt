@@ -2,7 +2,6 @@ package com.example.brewday
 
 import android.content.ContentValues
 import android.content.Context
-import android.database.Cursor
 import android.database.DatabaseUtils
 import android.database.DatabaseUtils.dumpCursorToString
 import android.database.sqlite.SQLiteDatabase
