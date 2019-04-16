@@ -12,7 +12,6 @@ import com.example.myapplication.Recipe
 
 class DBOpenHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) : SQLiteOpenHelper(context, DATABASE_NAME, factory, DATABASE_VERSION) {
     override fun onCreate(db: SQLiteDatabase) {
-
         val CREATE_RECIPES_TABLE = ("CREATE TABLE " +
                 TABLE_NAME + "("
                 + COLUMN_ID + " UUID PRIMARY KEY," +
@@ -35,13 +34,12 @@ class DBOpenHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) : S
             $processes_type_column TEXT
             )
         """)
-        db.execSQL(CREATE_RECIPES_TABLE)
         db.execSQL(create_processes_table)
+        db.execSQL(CREATE_RECIPES_TABLE)
     }
 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME)
-        db.execSQL("DROP TABLE IF EXISTS " + processes_table_name)
         onCreate(db)
     }
 
@@ -130,27 +128,6 @@ class DBOpenHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) : S
         db.close()
     }
 
-    fun getAllProcesses(): ArrayList<BrewProcess> {
-        val db = this.readableDatabase
-
-        val processesList = ArrayList<BrewProcess>()
-
-        val cursor = db.rawQuery("select * from $processes_table_name", null)
-
-        if (cursor.moveToFirst()) {
-            do {
-                val retrievedProcess = BrewProcess(
-                    cursor.getString(cursor.getColumnIndex(processes_id)),
-                    cursor.getString(cursor.getColumnIndex(processes_name_column)),
-                    cursor.getString(cursor.getColumnIndex(processes_type_column))
-                )
-
-                retrievedProcess.addProcessToList(processesList, retrievedProcess)
-            } while (cursor.moveToNext())
-        }
-        return processesList
-    }
-
     companion object {
         private val DATABASE_VERSION = 1
         private val DATABASE_NAME = "brewday.db"
@@ -161,7 +138,6 @@ class DBOpenHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) : S
         val recipe_malt_column = "recipe_malt"
         val recipe_hops_column = "recipe_hops"
         val recipe_yeast_column = "recipe_yeast"
-
         val processes_table_name = "process"
         val processes_name_column = "process_name"
         val processes_type_column = "process_type"

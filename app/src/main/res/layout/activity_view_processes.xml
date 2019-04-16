@@ -41,7 +41,7 @@
             android:layout_gravity="bottom|end"
             android:layout_margin="@dimen/fab_margin"
             android:tint="@color/colorWhite"
-            android:onClick="addRecipe"
+            android:onClick="addProcess"
             app:srcCompat="@android:drawable/ic_input_add" android:clickable="true" android:focusable="true"
             app:fabSize="normal" android:layout_marginBottom="8dp" app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginEnd="8dp" app:layout_constraintEnd_toEndOf="parent"/>

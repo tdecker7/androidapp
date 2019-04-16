@@ -27,4 +27,15 @@
     <string name="view_processes_main_button">Brew Processes</string>
     <string name="viewProcessesTitle">Brew Processes</string>
     <string name="view_process">View Process</string>
+    <string name="addProcess">Add Process</string>
+    <string name="addProcessName">Process Name</string>
+    <string name="addProcessStyle">Process Type</string>
+    <string name="submitProcessButton">Submit Process</string>
+    <string name="updateProcessButton">Update Process</string>
+    <string name="deleteProcessButton">Delete process</string>
+    <string-array name="processTypeArray">
+        <item>"All Grain"</item>
+        <item>"Extract"</item>
+        <item>"Brew In A Bag"</item>
+    </string-array>
 </resources>

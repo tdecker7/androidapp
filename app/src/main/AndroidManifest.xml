@@ -33,6 +33,18 @@
                     android:name="android.support.PARENT_ACTIVITY"
                     android:value=".MainActivity" />
         </activity>
+        <activity android:name=".ViewProcess"
+                  android:parentActivityName=".ViewProcesses">
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value=".MainActivity" />
+        </activity>
+        <activity android:name=".AddProcess"
+                  android:parentActivityName=".ViewProcesses">
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value=".ViewRecipes" />
+        </activity>
         <activity
                 android:name=".MainActivity"
                 android:label="@string/app_name"

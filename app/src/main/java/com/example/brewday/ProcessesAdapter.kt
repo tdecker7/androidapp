@@ -1,14 +1,16 @@
 package com.example.brewday
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R
-import kotlinx.android.synthetic.main.activity_add_recipe.view.*
+import com.example.myapplication.ViewProcess
 
 class ProcessesAdapter(private val processesList: ArrayList<BrewProcess>) :
     RecyclerView.Adapter<ProcessesAdapter.ProcessesViewHolder>() {
@@ -16,10 +18,11 @@ class ProcessesAdapter(private val processesList: ArrayList<BrewProcess>) :
 
     override fun onBindViewHolder(holder: ProcessesViewHolder, position: Int) {
         var processNameView = holder.textView.findViewById<TextView>(R.id.process_name)
-        var processStyleView = holder.textView.findViewById<TextView>(R.id.process_type)
+        var processTypeView = holder.textView.findViewById<TextView>(R.id.process_type)
         var processButton = holder.textView.findViewById<Button>(R.id.view_process_button)
-        processButton.text = R.string.view_process.toString()
+        processButton.text = "View Process"
         processNameView.text = processesList[position].name
+        processTypeView.text = processesList[position].type
 
         processButton.setOnClickListener {
             holder.viewProcess(holder.textView.context, processesList[position].id)
@@ -28,6 +31,9 @@ class ProcessesAdapter(private val processesList: ArrayList<BrewProcess>) :
 
     class ProcessesViewHolder(val textView: LinearLayout) : RecyclerView.ViewHolder(textView) {
         fun viewProcess(context: Context, id: String) {
+            val viewProcessIntent = Intent(context, ViewProcess::class.java)
+            viewProcessIntent.putExtra("ID", id)
+            startActivity(context, viewProcessIntent, null)
 
         }
     }
