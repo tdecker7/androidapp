@@ -42,8 +42,13 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     fun viewRecipes(view: View) {
-        val intent = Intent(this, ViewRecipes::class.java)
-        startActivity(intent)
+        val viewRecipesIntent = Intent(this, ViewRecipes::class.java)
+        startActivity(viewRecipesIntent)
+    }
+
+    fun viewProcesses(view: View) {
+        val viewProcessesIntent = Intent(this, ViewProcesses::class.java)
+        startActivity(viewProcessesIntent)
     }
 
     override fun onBackPressed() {

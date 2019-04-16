@@ -12,9 +12,11 @@ import kotlinx.android.synthetic.main.activity_add_recipe.view.*
 
 class ProcessesAdapter(private val processesList: ArrayList<BrewProcess>) :
     RecyclerView.Adapter<ProcessesAdapter.ProcessesViewHolder>() {
+    override fun getItemCount() = processesList.size
 
     override fun onBindViewHolder(holder: ProcessesViewHolder, position: Int) {
         var processNameView = holder.textView.findViewById<TextView>(R.id.process_name)
+        var processStyleView = holder.textView.findViewById<TextView>(R.id.process_type)
         var processButton = holder.textView.findViewById<Button>(R.id.view_process_button)
         processButton.text = R.string.view_process.toString()
         processNameView.text = processesList[position].name

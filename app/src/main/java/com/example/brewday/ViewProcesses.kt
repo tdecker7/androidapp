@@ -1,12 +1,13 @@
-package com.example.brewday
+package com.example.myapplication
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.myapplication.R
+import com.example.brewday.BrewProcess
+import com.example.brewday.DBOpenHelper
+import com.example.brewday.ProcessesAdapter
 
 class ViewProcesses : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
@@ -27,6 +28,7 @@ class ViewProcesses : AppCompatActivity() {
 
         processesList = dbHelper.getAllProcesses()
         viewManager = LinearLayoutManager(this)
+        processesAdapter = ProcessesAdapter(processesList)
         recyclerView = findViewById<RecyclerView>(R.id.rvProcesses).apply {
             setHasFixedSize(true)
             layoutManager = viewManager
@@ -34,9 +36,9 @@ class ViewProcesses : AppCompatActivity() {
         }
     }
 
-    fun addProcess(view: View) {
-        val addProcessIntent = Intent(this, AddProcess::class.java)
-        startActivity(addProcessIntent)
-
-    }
+//    fun addProcess(view: View) {
+//        val addProcessIntent = Intent(this, AddProcess::class.java)
+//        startActivity(addProcessIntent)
+//
+//    }
 }

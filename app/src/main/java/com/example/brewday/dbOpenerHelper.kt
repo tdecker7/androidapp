@@ -32,7 +32,8 @@ class DBOpenHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) : S
             create table $processes_table_name (
             $processes_id UUID PRIMARY KEY,
             $processes_name_column TEXT,
-            $processes_type_column TEXT,
+            $processes_type_column TEXT
+            )
         """)
         db.execSQL(CREATE_RECIPES_TABLE)
         db.execSQL(create_processes_table)
@@ -40,6 +41,7 @@ class DBOpenHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) : S
 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME)
+        db.execSQL("DROP TABLE IF EXISTS " + processes_table_name)
         onCreate(db)
     }
 
