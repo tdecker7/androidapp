@@ -16,6 +16,9 @@
                 android:textSize="30sp"
                 android:textStyle="bold"
                 android:textColor="@color/black"
+                android:focusableInTouchMode="true"
+                android:focusable="true"
+                android:descendantFocusability="beforeDescendants"
                 android:id="@+id/addRecipeTitle" app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
                 app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp" android:layout_marginTop="8dp"
                 app:layout_constraintTop_toTopOf="parent"/>
@@ -27,6 +30,8 @@
                 android:ems="10"
                 android:id="@+id/view_recipe_name"
                 android:layout_marginTop="8dp"
+                android:nextFocusLeft="@+id/add_recipe_name"
+                android:nextFocusUp="@+id/add_recipe_name"
                 app:layout_constraintTop_toBottomOf="@+id/addRecipeTitle" android:layout_marginEnd="8dp"
                 app:layout_constraintEnd_toEndOf="parent" android:layout_marginStart="8dp"
                 app:layout_constraintStart_toStartOf="parent"/>

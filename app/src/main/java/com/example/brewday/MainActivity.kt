@@ -1,5 +1,6 @@
 package com.example.myapplication
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -21,33 +22,38 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
-    private lateinit var recyclerView: RecyclerView
-    private lateinit var recipesAdapter: RecipesAdapter
-    private lateinit var viewManager: RecyclerView.LayoutManager
-    lateinit var recipesList: ArrayList<Recipe>
+//    private lateinit var recyclerView: RecyclerView
+//    private lateinit var recipesAdapter: RecipesAdapter
+//    private lateinit var viewManager: RecyclerView.LayoutManager
+//    lateinit var recipesList: ArrayList<Recipe>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
-        val dbHelper = DBOpenHelper(this, null)
-
-        recipesList = dbHelper.getAllRecipes()
-
-        viewManager = LinearLayoutManager(this)
-        recipesAdapter = RecipesAdapter(recipesList)
-
-        recyclerView = findViewById<RecyclerView>(R.id.rvRecipes).apply {
-            setHasFixedSize(true)
-            layoutManager = viewManager
-            adapter = recipesAdapter
+        view_recipes_main.setOnClickListener {
+            viewRecipes()
         }
 
 
-        fab.setOnClickListener {
-            addRecipe()
-        }
+//        val dbHelper = DBOpenHelper(this, null)
+//
+//        recipesList = dbHelper.getAllRecipes()
+//
+//        viewManager = LinearLayoutManager(this)
+//        recipesAdapter = RecipesAdapter(recipesList)
+//
+//        recyclerView = findViewById<RecyclerView>(R.id.rvRecipes).apply {
+//            setHasFixedSize(true)
+//            layoutManager = viewManager
+//            adapter = recipesAdapter
+//        }
+
+
+//        fab.setOnClickListener {
+//            addRecipe()
+//        }
 
 
         val toggle = ActionBarDrawerToggle(
@@ -59,10 +65,15 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         nav_view.setNavigationItemSelectedListener(this)
     }
 
-    fun addRecipe() {
-        val intent = Intent(this, AddRecipe::class.java)
+    fun viewRecipes() {
+        val intent = Intent(this, ViewRecipes::class.java)
         startActivity(intent)
     }
+
+//    fun addRecipe() {
+//        val intent = Intent(this, AddRecipe::class.java)
+//        startActivity(intent)
+//    }
 
 
     override fun onBackPressed() {
@@ -92,22 +103,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         // Handle navigation view item clicks here.
         when (item.itemId) {
-            R.id.nav_camera -> {
-                // Handle the camera action
+            R.id.nav_recipes-> {
+                val mainActivityIntent = Intent(this, MainActivity::class.java)
+                startActivity(mainActivityIntent)
             }
-            R.id.nav_gallery -> {
-
-            }
-            R.id.nav_slideshow -> {
-
-            }
-            R.id.nav_manage -> {
-
-            }
-            R.id.nav_share -> {
-
-            }
-            R.id.nav_send -> {
+            R.id.nav_process-> {
 
             }
         }

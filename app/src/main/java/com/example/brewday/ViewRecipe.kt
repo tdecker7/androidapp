@@ -2,6 +2,7 @@ package com.example.myapplication
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
@@ -15,30 +16,40 @@ class ViewRecipe: AppCompatActivity() {
 
         val contextRecipeId = getIntent().getStringExtra("ID")
         setupContextRecipe(contextRecipeId)
-val updateRecipeButton = findViewById<Button>(R.id.update_recipe_button)
+        val updateRecipeButton = findViewById<Button>(R.id.update_recipe_button)
         val deleteRecipeButton = findViewById<Button>(R.id.delete_recipe_button)
 
         updateRecipeButton.setOnClickListener {
             val dbHandler = DBOpenHelper(this, null)
-            val recipe = Recipe(
-                name=findViewById<EditText>(R.id.view_recipe_name).text.toString(),
-                style=findViewById<EditText>(R.id.view_recipe_style).text.toString(),
-                malt=findViewById<EditText>(R.id.view_recipe_malt).text.toString(),
-                hops=findViewById<EditText>(R.id.view_recipe_hops).text.toString(),
-                yeast=findViewById<EditText>(R.id.view_recipe_yeast).text.toString()
+                val name = findViewById<EditText>(R.id.view_recipe_name).text.toString()
+                val style = findViewById<EditText>(R.id.view_recipe_style).text.toString()
+                val malt = findViewById<EditText>(R.id.view_recipe_malt).text.toString()
+                val hops = findViewById<EditText>(R.id.view_recipe_hops).text.toString()
+                val yeast = findViewById<EditText>(R.id.view_recipe_yeast).text.toString()
+
+            val recipe = mapOf(
+                "name" to name,
+                "style" to style,
+                "malt" to malt,
+                "hops" to hops,
+                "yeast" to yeast
             )
 
-            dbHandler.updateRecipe(recipe)
+            dbHandler.updateRecipe(recipe, contextRecipeId)
 
-            startMainActivity()
+            finish()
         }
 
         deleteRecipeButton.setOnClickListener {
             val dbHandler = DBOpenHelper(this, null)
             dbHandler.deleteRecipe(contextRecipeId)
 
-            startMainActivity()
+            finish()
         }
+    }
+
+    override fun onBackPressed() {
+        finish()
     }
 
     private fun setupContextRecipe(contextRecipeId: String) {

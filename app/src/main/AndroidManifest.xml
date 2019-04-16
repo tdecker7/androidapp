@@ -10,12 +10,18 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
         <activity android:name=".AddRecipe"
-                  android:parentActivityName=".MainActivity">
+                  android:parentActivityName=".ViewRecipes">
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
-                    android:value=".MainActivity" />
+                    android:value=".ViewRecipes" />
         </activity>
         <activity android:name=".ViewRecipe"
+                  android:parentActivityName=".ViewRecipes">
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value=".ViewRecipes" />
+        </activity>
+        <activity android:name=".ViewRecipes"
                   android:parentActivityName=".MainActivity">
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"

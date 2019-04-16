@@ -27,8 +27,7 @@ class AddRecipe : AppCompatActivity() {
             )
 
             dbHandler.addRecipe(recipe)
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
+            finish()
         }
     }
 

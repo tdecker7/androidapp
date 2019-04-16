@@ -19,4 +19,10 @@
     <string name="viewRecipeYeast">Yeast</string>
     <string name="updateRecipeButton">Update Recipe</string>
     <string name="deleteRecipeButton">Delete Recipe</string>
+    <string name="nav_recipes_title">Recipes</string>
+    <string name="nav_processes_title">Brew Processes</string>
+    <string name="rvRecipesTitle">Recent Recipes</string>
+    <string name="viewRecipesTitle">Recipes</string>
+    <string name="view_recipes_main_button">Brew Recipes</string>
+    <string name="view_processes_main_button">Brew Processes</string>
 </resources>

@@ -4,6 +4,7 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.Cursor
 import android.database.DatabaseUtils
+import android.database.DatabaseUtils.dumpCursorToString
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.util.Log
@@ -26,7 +27,15 @@ class DBOpenHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) : S
                 recipe_yeast_column
                 + " TEXT"
                 + ")")
+
+        val create_processes_table = ("""
+            create table $processes_table_name (
+            $processes_id UUID PRIMARY KEY,
+            $processes_name_column TEXT,
+            $processes_type_column TEXT,
+        """)
         db.execSQL(CREATE_RECIPES_TABLE)
+        db.execSQL(create_processes_table)
     }
 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
@@ -75,7 +84,7 @@ class DBOpenHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) : S
         Log.d("RECIPESINFO", recipesList.toString())
         var cursor =  db.rawQuery("SELECT * FROM $TABLE_NAME", null)
 
-        Log.d("CURSOR", cursor.count.toString())
+        Log.d("CURSOR", dumpCursorToString(cursor))
         if (cursor.moveToFirst()) {
             do {
                 val retrievedRecipe = Recipe(
@@ -97,23 +106,27 @@ class DBOpenHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) : S
     }
 
     fun deleteRecipe(id: String) {
-        val db = this.readableDatabase
+        val db = this.writableDatabase
 
-        db.rawQuery("DELETE FROM $TABLE_NAME where id = '$id'", null)
+        db.delete(TABLE_NAME, "$COLUMN_ID = ?", arrayOf(id))
+        db.close()
     }
 
-    fun updateRecipe(recipe: Recipe) {
-        val db = this.readableDatabase
+    fun updateRecipe(recipe: Map<String, String>, contextId: String) {
+        val db = this.writableDatabase
 
-        db.rawQuery(
-            "UPDATE $TABLE_NAME " +
-                    "SET $recipe_name_column = ${recipe.name} " +
-                    "$recipe_style_column = ${recipe.style} " +
-                    "$recipe_malt_column = ${recipe.malt} " +
-                    "$recipe_hops_column = ${recipe.hops} " +
-                    "$recipe_yeast_column = ${recipe.yeast} " +
-                    "where id = ${recipe.id};",
-        null)
+        val values = ContentValues().apply {
+            put(recipe_name_column, recipe["name"])
+            put(recipe_style_column, recipe["style"])
+            put(recipe_malt_column, recipe["malt"])
+            put(recipe_hops_column, recipe["hops"])
+            put(recipe_yeast_column, recipe["yeast"])
+        }
+
+        Log.d("Values", values.toString())
+
+        db.update(TABLE_NAME, values, "$COLUMN_ID = ?", arrayOf(contextId))
+        db.close()
     }
 
     companion object {
@@ -126,5 +139,10 @@ class DBOpenHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) : S
         val recipe_malt_column = "recipe_malt"
         val recipe_hops_column = "recipe_hops"
         val recipe_yeast_column = "recipe_yeast"
+
+        val processes_table_name = "process"
+        val processes_name_column = "process_name"
+        val processes_type_column = "process_type"
+        val processes_id = "_id"
     }
 }
